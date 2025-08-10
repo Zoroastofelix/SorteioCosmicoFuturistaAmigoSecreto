@@ -1,14 +1,4 @@
-Com certeza\! Vou criar um `README.md` novo para você, seguindo o estilo que o projeto já tem e incorporando todas as funcionalidades e a estrutura que construímos juntos.
 
-Este `README.md` será uma descrição clara e completa do seu "Sorteio Cósmico de Amigos".
-
------
-
-## `README.md` (Completo e no Estilo do Projeto)
-
-Copie todo este conteúdo e cole no seu arquivo **`README.md`** que você criou no VS Code.
-
-```markdown
 # 🌌✨ Sorteio Cósmico de Amigos ✨🌌
 
 > Uma transmissão futurista para descobrir seu amigo secreto em uma edição Cyberpunk imersiva.
@@ -144,4 +134,5 @@ Esta é uma **aplicação web interativa** projetada para realizar sorteios de *
 Este projeto está licenciado sob a [MIT License](LICENSE). Sinta-se livre para usar, modificar e compartilhar.
 
 ---
+
 ```
