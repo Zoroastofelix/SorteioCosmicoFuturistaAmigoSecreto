@@ -1,0 +1,727 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+
+/* Variáveis de cores para o tema futurista */
+:root {
+    --bg-dark: #0a0a14;
+    --panel-bg: rgba(12, 18, 33, 0.8); /* Fundo dos painéis com transparência */
+    --border-color-light: rgba(0, 204, 255, 0.2); /* Azul ciano claro */
+    --border-color-dark: rgba(0, 204, 255, 0.4); /* Azul ciano mais forte */
+
+    --primary-neon: #00ccff; /* Ciano principal */
+    --secondary-neon: #ff00ff; /* Magenta secundário */
+    --accent-neon: #ffcc00; /* Amarelo/laranja de destaque */
+    --error-neon: #ff3366; /* Vermelho para erros */
+
+    --text-light: #e0e0e0; /* Texto geral claro */
+    --text-dark: #888; /* Texto secundário/apagado */
+
+    --glow-primary: 0 0 15px rgba(0, 204, 255, 0.5);
+    --glow-secondary: 0 0 15px rgba(255, 0, 255, 0.5);
+    --glow-accent: 0 0 15px rgba(255, 204, 0, 0.5);
+    --glow-error: 0 0 15px rgba(255, 51, 102, 0.5);
+
+    --font-heading: 'Orbitron', monospace;
+    --font-body: 'Rajdhani', sans-serif;
+}
+
+/* Animações */
+@keyframes pulseGlowPrimary {
+    0% { box-shadow: 0 0 10px var(--primary-neon); }
+    50% { box-shadow: 0 0 25px var(--primary-neon); }
+    100% { box-shadow: 0 0 10px var(--primary-neon); }
+}
+
+@keyframes pulseGlowSecondary {
+    0% { box-shadow: 0 0 10px var(--secondary-neon); }
+    50% { box-shadow: 0 0 25px var(--secondary-neon); }
+    100% { box-shadow: 0 0 10px var(--secondary-neon); }
+}
+
+@keyframes textGlowPrimary {
+    0% { text-shadow: 0 0 5px var(--primary-neon); }
+    50% { text-shadow: 0 0 15px var(--primary-neon); }
+    100% { text-shadow: 0 0 5px var(--primary-neon); }
+}
+
+@keyframes textGlowSecondary {
+    0% { text-shadow: 0 0 5px var(--secondary-neon); }
+    50% { text-shadow: 0 0 15px var(--secondary-neon); }
+    100% { text-shadow: 0 0 5px var(--secondary-neon); }
+}
+
+/* Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    min-height: 100vh;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: relative; /* Necessário para o ::before */
+
+    /* Imagem de fundo futurista de amigos */
+    background-image: url('assets/futuristic-friends-background.png'); /* Adicione sua imagem aqui */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Opcional: imagem de fundo fixa */
+}
+
+/* Overlay para escurecer a imagem de fundo e melhorar legibilidade */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Transparência de 70% */
+    backdrop-filter: blur(2px); /* Desfoque sutil para um efeito de vidro */
+    z-index: -1; /* Abaixo do conteúdo principal, acima da imagem */
+}
+
+/* Efeito de brilho de fundo sutil (partículas/gradientes) */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(0, 255, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 0, 255, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 1; /* Garante que o container fique acima do background e overlays */
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.title-glow {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--primary-neon);
+    margin-bottom: 10px;
+    text-shadow: var(--glow-primary);
+    animation: textGlowPrimary 2s infinite alternate; /* Animação de brilho */
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    font-weight: 400;
+}
+
+.main-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+/* Estilo para todos os painéis */
+.panel-glow {
+    background: var(--panel-bg);
+    border: 1px solid var(--border-color-light);
+    border-radius: 12px;
+    padding: 30px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4), var(--glow-primary); /* Brilho sutil */
+    transition: all 0.3s ease;
+}
+
+.panel-glow:hover {
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6), var(--glow-primary);
+}
+
+.form-section {
+    /* Herda de .panel-glow */
+}
+
+.input-group {
+    margin-bottom: 25px;
+}
+
+.input-label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--primary-neon);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    animation: textGlowPrimary 3s infinite alternate;
+}
+
+.input-field {
+    width: 100%;
+    padding: 15px 20px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 2px solid var(--border-color-light);
+    border-radius: 8px;
+    color: var(--text-light);
+    font-size: 1.1rem;
+    font-family: var(--font-body);
+    transition: all 0.3s ease;
+    box-shadow: inset 0 0 5px rgba(0, 204, 255, 0.1);
+}
+
+.input-field::placeholder {
+    color: var(--text-dark);
+    opacity: 0.7;
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: var(--primary-neon);
+    box-shadow: 0 0 15px var(--primary-neon), inset 0 0 8px var(--primary-neon);
+    background: rgba(0, 204, 255, 0.08);
+}
+
+.input-field:disabled {
+    background: rgba(100, 100, 100, 0.1);
+    border-color: rgba(100, 100, 100, 0.3);
+    color: #666;
+    cursor: not-allowed;
+}
+
+/* Notificações */
+.notification-area {
+    color: var(--error-neon);
+    font-size: 0.95rem;
+    margin-top: 8px;
+    min-height: 20px;
+    text-align: center;
+    text-shadow: 0 0 5px var(--error-neon);
+    font-weight: 600;
+}
+
+.warning-message {
+    color: var(--accent-neon);
+    font-size: 1rem;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: 600;
+    text-shadow: 0 0 8px var(--accent-neon);
+    animation: textGlowPrimary 2.5s infinite alternate;
+}
+
+/* Botões base */
+.btn {
+    padding: 15px 30px;
+    border: 2px solid;
+    border-radius: 8px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+    overflow: hidden; /* Para efeitos de brilho interno */
+}
+
+.btn::before { /* Efeito de brilho ao passar o mouse */
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transition: width 0.4s ease, height 0.4s ease, background 0.4s ease;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+}
+
+.btn:hover::before {
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.btn span {
+    position: relative;
+    z-index: 1; /* Garante que o texto fique acima do ::before */
+}
+
+.btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    background: rgba(100, 100, 100, 0.1);
+    border-color: #666;
+    color: #666;
+    box-shadow: none;
+    transform: none;
+}
+
+.btn-icon {
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) saturate(100%) invert(80%); /* Base para ícones claros */
+}
+
+.btn:disabled .btn-icon {
+    filter: brightness(0) saturate(100%) invert(40%);
+}
+
+/* Cores específicas dos botões */
+.btn-primary { /* Botão Adicionar */
+    width: 100%;
+    margin-bottom: 20px;
+    background: rgba(0, 204, 255, 0.1);
+    border-color: var(--primary-neon);
+    color: var(--primary-neon);
+    box-shadow: var(--glow-primary);
+}
+.btn-primary:hover:not(:disabled) {
+    background: rgba(0, 204, 255, 0.2);
+    box-shadow: 0 0 20px var(--primary-neon);
+    transform: translateY(-2px);
+}
+.btn-primary .btn-icon { filter: brightness(0) saturate(100%) invert(52%) sepia(100%) saturate(1500%) hue-rotate(170deg); }
+
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 25px; /* Adicionado um espaçamento superior */
+}
+
+.btn-sort { /* Botão Iniciar Sorteio */
+    flex: 1;
+    min-width: 150px;
+    background: rgba(255, 0, 255, 0.1);
+    border-color: var(--secondary-neon);
+    color: var(--secondary-neon);
+    box-shadow: var(--glow-secondary);
+    animation: pulseGlowSecondary 2s infinite alternate; /* Animação de pulso */
+}
+.btn-sort:hover:not(:disabled) {
+    background: rgba(255, 0, 255, 0.2);
+    box-shadow: 0 0 25px var(--secondary-neon);
+    transform: translateY(-2px);
+}
+.btn-sort .btn-icon { filter: brightness(0) saturate(100%) invert(30%) sepia(100%) saturate(7500%) hue-rotate(290deg); }
+
+
+.btn-reset { /* Botão Reiniciar Sistema */
+    flex: 1;
+    min-width: 150px;
+    background: rgba(255, 204, 0, 0.1); /* Um tom mais amarelo/laranja */
+    border-color: var(--accent-neon);
+    color: var(--accent-neon);
+    box-shadow: var(--glow-accent);
+}
+.btn-reset:hover:not(:disabled) {
+    background: rgba(255, 204, 0, 0.2);
+    box-shadow: 0 0 25px var(--accent-neon);
+    transform: translateY(-2px);
+}
+.btn-reset .btn-icon { filter: brightness(0) saturate(100%) invert(80%) sepia(100%) saturate(1500%) hue-rotate(25deg); }
+
+.btn-reveal { /* Botão Revelar Todos os Pares */
+    background: rgba(0, 255, 0, 0.1); /* Verde neon */
+    border-color: #00ff00;
+    color: #00ff00;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+    margin-top: 20px;
+    width: 100%; /* Ocupa a largura total na seção de resultado */
+}
+.btn-reveal:hover:not(:disabled) {
+    background: rgba(0, 255, 0, 0.2);
+    box-shadow: 0 0 25px rgba(0, 255, 0, 0.7);
+    transform: translateY(-2px);
+}
+
+/* Lista de amigos */
+.friends-list-container {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--border-color-light);
+    border-radius: 8px;
+    padding: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 25px; /* Espaço antes dos botões de ação */
+}
+
+.friends-list-container h3.list-title {
+    font-family: var(--font-heading);
+    margin-bottom: 15px;
+    color: var(--primary-neon);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1.2rem;
+    text-shadow: var(--glow-primary);
+}
+
+.friends-list {
+    list-style: none;
+    padding: 0;
+}
+
+.friends-list li {
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    background: rgba(0, 204, 255, 0.05);
+    border: 1px solid rgba(0, 204, 255, 0.2);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: space-between; /* Espaça nome e botão de remover */
+    align-items: center;
+    position: relative; /* Para o botão de remover */
+}
+
+.friends-list li:hover {
+    background: rgba(0, 204, 255, 0.1);
+    transform: translateX(5px);
+}
+
+.friends-list li .amigo-nome {
+    flex-grow: 1; /* Permite que o nome ocupe o espaço restante */
+    color: var(--text-light);
+}
+
+.friends-list li.drawn-out { /* Usado para amigos já sorteados */
+    background: rgba(100, 100, 100, 0.1);
+    border-color: rgba(100, 100, 100, 0.3);
+    color: #888;
+    text-decoration: none; /* Não usar line-through, usar o efeito gif */
+}
+
+.friends-list li.drawn-out .amigo-name {
+    color: #666; /* Cor do texto de amigos sorteados */
+}
+
+/* Botão de remover amigo da lista */
+.remove-btn {
+    background: none;
+    border: none;
+    color: var(--error-neon);
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-left: 10px;
+    padding: 5px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    display: flex; /* Para centralizar o ícone */
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+.remove-btn:hover {
+    background: rgba(255, 51, 102, 0.2);
+    box-shadow: 0 0 10px var(--error-neon);
+}
+.remove-btn img {
+    width: 16px; /* Tamanho do ícone X */
+    height: 16px;
+    filter: brightness(0) saturate(100%) invert(20%) sepia(100%) saturate(7000%) hue-rotate(330deg); /* Vermelho */
+}
+.remove-btn:hover img {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(0deg); /* Branco no hover */
+}
+
+/* Seção de Resultado */
+.result-section {
+    /* Herda de .panel-glow */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 250px; /* Aumentado para melhor visualização */
+}
+
+.result-title {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    color: var(--secondary-neon);
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: var(--glow-secondary);
+    animation: textGlowSecondary 2.8s infinite alternate;
+}
+
+.raffle-display {
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px dashed var(--secondary-neon);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    min-height: 150px;
+    display: flex; /* Usar flex para os containers internos */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+    font-family: var(--font-heading);
+    font-size: 1.3em;
+    color: var(--primary-neon);
+    text-shadow: var(--glow-primary);
+    overflow-y: auto; /* Para a lista de pares */
+    max-height: 200px;
+}
+
+.initial-message, .status-text {
+    color: var(--text-dark);
+    font-style: italic;
+    font-size: 1.1rem;
+}
+
+.status-panel {
+    margin-top: 15px;
+    font-size: 1rem;
+    color: var(--text-dark);
+    text-align: center;
+    min-height: 20px;
+}
+
+/* Estilo para cada par sorteado (X -> Y) */
+.raffle-pair {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 8px 0;
+    font-size: 1.3em;
+    color: var(--primary-neon);
+    text-shadow: var(--glow-primary);
+    line-height: 1.2;
+}
+
+.raffle-pair img {
+    width: 25px;
+    height: 25px;
+    filter: brightness(0) saturate(100%) invert(52%) sepia(100%) saturate(1500%) hue-rotate(170deg); /* Ciano */
+}
+
+/* Estilo para o resultado único do sorteio (o CONTAINER DIV) */
+.single-draw-result {
+    display: none; /* Inicia escondido, será 'block' pelo JS quando tiver conteúdo */
+}
+
+/* Estilo para o TEXTO do nome sorteado */
+.single-draw-result-name {
+    font-family: var(--font-heading); /* Orbitron */
+    font-size: 2.2rem; /* Tamanho maior para o nome sorteado individualmente */
+    font-weight: 900;
+    color: var(--primary-neon); /* Cor vibrante (ciano) */
+    text-shadow: var(--glow-primary); /* Brilho neon (ciano) */
+    animation: textGlowPrimary 2s infinite alternate; /* Animação de pulsar o brilho */
+    line-height: 1.2; /* Espaçamento de linha */
+    padding: 5px; /* Pequeno padding para o brilho */
+    display: inline-block; /* Para que o padding e o brilho se apliquem melhor */
+}
+
+/* Estilo para a área que mostra todos os pares sorteados */
+.all-pairs-result {
+    display: none; /* Inicia escondido */
+    width: 100%;
+    max-height: 250px; /* Ou ajuste conforme necessário */
+    overflow-y: auto;
+    font-family: var(--font-body); /* Para os pares, pode ser Rajdhani ou Orbitron */
+    font-size: 1.1em;
+    color: var(--primary-neon);
+    text-shadow: var(--glow-primary);
+    text-align: center;
+    padding-top: 10px; /* Adiciona um pequeno espaçamento */
+}
+
+
+.waiting-gif {
+    width: 80px;
+    height: 80px;
+    margin-top: 10px;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px); /* Mais desfoque */
+    z-index: 1000;
+    display: flex; /* Para centralizar o modal-content */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    /* Herda de .panel-glow para consistência */
+    padding: 40px; /* Aumentado o padding */
+    min-width: 350px;
+    max-width: 90%;
+}
+
+.modal-title {
+    font-family: var(--font-heading);
+    color: var(--primary-neon);
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+    text-shadow: var(--glow-primary);
+}
+
+.modal-message {
+    color: var(--text-light);
+    margin-bottom: 30px;
+    font-size: 1.15rem;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Aumentado o espaço entre botões */
+}
+
+.modal-buttons .btn {
+    padding: 12px 30px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    min-width: 150px;
+}
+
+.btn-confirm {
+    background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
+    color: #ffffff;
+    border: 2px solid #ff0000;
+    text-shadow: 0 0 5px rgba(255, 0, 0, 0.7);
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.4),
+                inset 0 0 10px rgba(255, 0, 0, 0.4);
+}
+.btn-confirm:hover {
+    background: linear-gradient(135deg, #ff1a1a 0%, #e60000 100%);
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.6),
+                inset 0 0 15px rgba(255, 0, 0, 0.6);
+    transform: translateY(-2px);
+}
+
+.btn-cancel {
+    background: linear-gradient(135deg, #2a2a3a 0%, #1a1a2e 100%);
+    color: var(--primary-neon);
+    border: 2px solid var(--primary-neon);
+    text-shadow: 0 0 5px var(--primary-neon);
+    box-shadow: 0 0 20px rgba(0, 204, 255, 0.2),
+                inset 0 0 10px rgba(0, 204, 255, 0.1);
+}
+.btn-cancel:hover {
+    background: linear-gradient(135deg, #3a3a4a 0%, #2a2a3e 100%);
+    box-shadow: 0 0 30px rgba(0, 204, 255, 0.3),
+                inset 0 0 15px rgba(0, 204, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Scrollbar customizada */
+.friends-list::-webkit-scrollbar,
+.raffle-display::-webkit-scrollbar {
+    width: 8px;
+}
+
+.friends-list::-webkit-scrollbar-track,
+.raffle-display::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+.friends-list::-webkit-scrollbar-thumb,
+.raffle-display::-webkit-scrollbar-thumb {
+    background: rgba(0, 204, 255, 0.5);
+    border-radius: 4px;
+}
+
+.friends-list::-webkit-scrollbar-thumb:hover,
+.raffle-display::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 204, 255, 0.7);
+}
+
+/* Responsividade */
+@media (min-width: 768px) {
+    .main-layout {
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+    }
+    .title-glow {
+        font-size: 4.5rem;
+    }
+    .result-section {
+        min-height: 400px; /* Ajuste para equilibrar os dois painéis */
+    }
+}
+
+@media (max-width: 767px) {
+    .container {
+        padding: 15px;
+    }
+    .title-glow {
+        font-size: 2.8rem;
+    }
+    .subtitle {
+        font-size: 1rem;
+    }
+    .form-section, .result-section {
+        padding: 20px;
+    }
+    .action-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .btn-sort, .btn-reset, .btn-primary {
+        min-width: auto;
+    }
+    .modal-content {
+        padding: 25px;
+    }
+    .modal-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .modal-buttons .btn {
+        min-width: unset;
+        width: 100%;
+    }
+    .raffle-pair {
+        font-size: 1.1em;
+    }
+    .raffle-pair img {
+        width: 20px;
+        height: 20px;
+    }
+}

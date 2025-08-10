@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorteio Cósmico de Amigos</title>
+    <link rel="stylesheet" href="futuristic-style.css"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title-glow">Descubra seu Amigo Secreto</h1>
+            <p class="subtitle">Sorteio</p>
+        </header>
+        
+        <div class="main-layout">
+            <section class="form-section panel-glow">
+                <div class="input-group">
+                    <label for="nomeAmigo" class="input-label">Digite o nome do ser:</label>
+                    <input type="text" id="nomeAmigo" class="input-field" placeholder="Nome do amigo..." maxlength="50">
+                    <div id="notificationMessage" class="notification-area"></div>
+                </div>
+                
+                <button type="button" onclick="addParticipant()" class="btn btn-primary" id="btnAdicionar">
+                    <span>Adicionar Participante</span>
+                </button>
+                
+                <div class="friends-list-container panel-glow">
+                    <h3 class="list-title">Lista de Cadastros</h3>
+                    <ul id="listaAmigos" class="friends-list">
+                        </ul>
+                </div>
+                
+                <div id="minParticipantsWarning" class="warning-message">Cadastre pelo menos 3 pessoas para iniciar o sorteio.</div>
+
+                <div class="action-buttons">
+                    <button type="button" class="btn btn-sort" id="btnSortear">
+                        <img src="assets/play-game.png" alt="Play" class="btn-icon">
+                        <span>Iniciar Sorteio</span>
+                    </button>
+                    
+                    <button type="button" onclick="reiniciarJogo()" class="btn btn-reset" id="btnReiniciar">
+                        <img src="assets/reload-game.png" alt="Reload" class="btn-icon">
+                        <span>Reiniciar Sistema</span>
+                    </button>
+                </div>
+            </section>
+            
+            <section class="result-section panel-glow">
+                <h2 class="result-title">Resultado da Transmissão</h2>
+                <div id="raffleOutputDisplay" class="raffle-display">
+                    <div id="initialContentContainer">
+                        <p class="initial-message">Aguardando dados...</p>
+                        <img src="assets/waiting-data.gif" alt="Aguardando dados" class="waiting-gif">
+                    </div>
+                    <div id="singleResult" class="single-draw-result"></div>
+                    <div id="allPairsResult" class="all-pairs-result"></div>
+                </div>
+                
+                <div id="gameStatus" class="status-panel">
+                    <p class="status-text">Pronto para a ação?</p>
+                </div>
+                
+                <button type="button" id="btnRevealAll" class="btn btn-reveal" style="display:none;">Revelar Todos os Pares</button>
+            </section>
+        </div>
+    </div>
+
+    <div id="confirmModal" class="modal">
+        <div class="modal-content panel-glow">
+            <h2 class="modal-title">Confirmar Reinício</h2>
+            <p class="modal-message">Tem certeza que deseja reiniciar o sistema?</p>
+            <div class="modal-buttons">
+                <button id="confirmReiniciar" class="btn btn-confirm">Confirmar</button>
+                <button id="cancelReiniciar" class="btn btn-cancel">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="futuristic-app.js" defer></script>
+</body>
+</html>
